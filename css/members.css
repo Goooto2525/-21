@@ -5,7 +5,7 @@
 }
 
 .members h2 {
-    font-size: 22pt;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
 }
@@ -21,23 +21,33 @@
     margin-right: auto;
 }
 
+/* ★ 画像を縦3行にするために display:flex を消す */
 .member-list {
-    display: flex;
     padding-top: 40px;
     padding-bottom: 10px;
     padding-left: 60px;
     padding-right: 60px;
-    overflow: scroll;
 }
 
+/* ★ li の中身は横並び（画像｜文章） */
 .member-list li {
-    flex-shrink: 0;
-    width: 260px;
-    margin-left: 75px;
+    display: flex;
+    gap:10px;
+    align-items: flex-start;
+    margin-bottom: 40px; /* ← 縦3行の間隔 */
 }
 
-.member-list li:first-child {
-    margin-left: 0;
+.member-list li img {
+    width: 100%;
+    max-width: 500px;
+    height:auto;
+    display:block;
+    margin: 0 auto;
+    flex-shrink: 0;
+}
+
+.member-list li .text-box {
+    width: 1000px;
 }
 
 @media (max-width: 800px) {
@@ -45,9 +55,18 @@
         padding-left: 20px;
         padding-right: 20px;
     }
+}
+.member-list li .text-box dt {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-    .member-list li {
-        width: 220px;
-        margin-left: 30px;
-    }
+.member-list li .text-box dd {
+    font-size: 30px;
+    line-height: 2;
+}
+.member-list li .text-box .speciality {
+    font-size: 30px;
+    line-height: 1.8;
 }
