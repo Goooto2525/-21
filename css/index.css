@@ -1,48 +1,12 @@
 @charset "utf-8";
 
-nav.floating {
-    position: absolute;
-    top: 100px;
-    left: 50px;
-    background-color: #d0d0d0;
-}
-
-.first-view {
-    height: calc(100vh - 110px);
-    background-image: url(../images/index/bg_main.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-}
-
-.first-view-text {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 40px;
-    padding-bottom: 80px;
-    color: #ffffff;
-    font-weight: bold;
-    text-shadow: 1px 1px 10px #4b2c14;
-}
-
-.first-view-text h1 {
-    font-family: "Montserrat", sans-serif;
-    font-size: 56px;
-    line-height: 72px;
-}
-
-.first-view-text p {
-    font-size: 18px;
-    margin-top: 20px;
-}
-
-.lead {
-    max-width: 1200px;
-    margin: 60px auto;
+:root {
+    --ink: #241b14;
+    --paper: #fbf6ee;
+    --maple: #b1441e;
+    --maple-deep: #7a2c12;
+    --mist: #d4fbf8;
+    --gold: #c98a2c;
 }
 
 *,
@@ -66,26 +30,26 @@ a {
 body {
     font-family: 'Noto Serif JP', serif;
     font-size: 16pt;
-    color: #000000;
+    color: var(--ink);
     line-height: 1;
-    background-color: #ffffff;
+    background-color: var(--paper);
 }
-
-/* タイトルは Cherry Bomb One + 日本語フォント */
-.first-view-text h1 {
-    font-family: 'Cherry Bomb One', 'Noto Serif JP', serif;
-    font-size: 56px;
-    line-height: 72px;
-}
-
-/* メニューのフォント（英字フォントのままでOK） */
-.site-menu ul li a {
-    font-family: 'Cherry Bomb One', cursive;
-}
-
 
 img {
     max-width: 100%;
+}
+
+nav.floating {
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    background-color: #d0d0d0;
+}
+
+/* ===== header ===== */
+.header {
+    background-color: var(--maple);
+    border-bottom: 1px solid rgba(36, 27, 20, 0.08);
 }
 
 .header-inner {
@@ -118,12 +82,338 @@ img {
     margin-right: 20px;
 }
 
-.site-menu ul li a {
+.header .site-menu ul li a {
     font-family: 'Cherry Bomb One', 'Noto Serif JP', serif;
     font-weight: 400;
+    color: #ffffff;
 }
 
+.header .site-menu ul li a:hover {
+    color: var(--mist);
+}
 
+/* ===== hero ===== */
+.first-view {
+    position: relative;
+    height: calc(100vh - 110px);
+    background-image: url(../images/index/bg_main.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.first-view::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(36, 27, 20, 0.1) 0%, rgba(36, 27, 20, 0.6) 100%);
+}
+
+.first-view-text {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-bottom: 80px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 10px #4b2c14;
+}
+
+.first-view-text h1 {
+    font-family: 'Cherry Bomb One', 'Noto Serif JP', serif;
+    font-size: 56px;
+    line-height: 72px;
+}
+
+.first-view-text p {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.lead {
+    max-width: 1200px;
+    margin-top: 40px;
+}
+
+.lead p {
+    font-size: 16px;
+    letter-spacing: 0.05em;
+}
+
+/* 舞い落ちる紅葉の葉（サイン要素） */
+.leaves {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.leaf {
+    position: absolute;
+    top: -40px;
+    width: 14px;
+    height: 14px;
+    background: var(--maple);
+    border-radius: 0% 100% 0% 100%;
+    opacity: 0.85;
+    animation: fall linear infinite;
+}
+
+.leaf:nth-child(1) { left: 8%;  background: var(--maple);      animation-duration: 11s; animation-delay: 0s; }
+.leaf:nth-child(2) { left: 22%; background: var(--gold);       animation-duration: 14s; animation-delay: 2s; width: 10px; height: 10px; }
+.leaf:nth-child(3) { left: 38%; background: var(--maple-deep); animation-duration: 9s;  animation-delay: 4s; }
+.leaf:nth-child(4) { left: 55%; background: var(--maple);      animation-duration: 13s; animation-delay: 1s; width: 18px; height: 18px; }
+.leaf:nth-child(5) { left: 70%; background: var(--gold);       animation-duration: 10s; animation-delay: 5s; width: 11px; height: 11px; }
+.leaf:nth-child(6) { left: 85%; background: var(--maple-deep); animation-duration: 12s; animation-delay: 3s; }
+.leaf:nth-child(7) { left: 95%; background: var(--maple);      animation-duration: 15s; animation-delay: 6s; width: 12px; height: 12px; }
+
+@keyframes fall {
+    from { transform: translateY(-10%) rotate(0deg); }
+    to   { transform: translateY(110vh) rotate(340deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .leaf { animation: none; display: none; }
+}
+
+/* ===== intro / stats ===== */
+.intro {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.intro-lead {
+    font-size: 20px;
+    line-height: 1.9;
+    max-width: 640px;
+}
+
+.stats {
+    display: flex;
+    gap: 60px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(36, 27, 20, 0.15);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-num {
+    font-family: 'Cherry Bomb One', 'Noto Serif JP', serif;
+    font-size: 48px;
+    color: var(--maple);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    color: var(--ink);
+}
+
+/* ===== spots teaser ===== */
+.spots-teaser {
+    background-color: #ffffff;
+    padding: 100px 40px;
+}
+
+.section-title {
+    font-family: 'Cherry Bomb One', 'Noto Serif JP', serif;
+    font-size: 26px;
+    text-align: center;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 3px;
+    background-color: var(--maple);
+    margin: 20px auto 0;
+}
+
+.spot-grid {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.spot-card {
+    display: block;
+    background-color: var(--paper);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.spot-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(36, 27, 20, 0.15);
+}
+
+.spot-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.spot-card-body {
+    padding: 20px;
+}
+
+.spot-card-body h3 {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.spot-card-body p {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 10px;
+    color: rgba(36, 27, 20, 0.75);
+}
+
+/* ===== food / access info cards ===== */
+.info-teaser {
+    padding: 100px 40px;
+}
+
+.info-grid {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.info-card {
+    display: flex;
+    background-color: var(--paper);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-card.reverse {
+    flex-direction: row-reverse;
+}
+
+.info-card img {
+    width: 340px;
+    height: 220px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.info-card-body {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-card-body h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.info-card-body p {
+    font-size: 14px;
+    line-height: 1.9;
+    margin-top: 14px;
+    color: rgba(36, 27, 20, 0.75);
+}
+
+.info-link {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--maple);
+    border-bottom: 1px solid var(--maple);
+    padding-bottom: 2px;
+    width: fit-content;
+}
+
+@media (max-width: 800px) {
+    .info-card,
+    .info-card.reverse {
+        flex-direction: column;
+    }
+
+    .info-card img {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+/* ===== CTA ===== */
+.cta {
+    background-color: var(--ink);
+    color: var(--mist);
+    text-align: center;
+    padding: 90px 40px;
+}
+
+.cta p {
+    font-size: 18px;
+    letter-spacing: 0.05em;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 40px;
+    border: 1px solid var(--mist);
+    border-radius: 999px;
+    font-family: 'Cherry Bomb One', 'Noto Serif JP', serif;
+    font-size: 14px;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--mist);
+    color: var(--ink);
+}
+
+/* ===== footer ===== */
+.footer {
+    color: #24211b;
+    background-color: var(--mist);
+    padding-top: 30px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    display: block;
+    width: 235px;
+    margin-top: 90px;
+}
+
+.copyright {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 90px;
+}
+
+/* ===== responsive ===== */
 @media (max-width: 800px) {
     .site-menu ul {
         display: block;
@@ -139,7 +429,7 @@ img {
         top: 0;
         left: 0;
         right: 0;
-        background-color: #ffffff;
+        background-color: var(--maple);
         height: 50px;
         z-index: 10;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -158,7 +448,7 @@ img {
         left: 0;
         right: 0;
         color: #ffffff;
-        background-color: #736e62;
+        background-color: var(--maple-deep);
         padding-top: 30px;
         padding-bottom: 50px;
         display: none;
@@ -173,7 +463,21 @@ img {
     }
 
     .main {
-        padding-top: 50px;;
+        padding-top: 50px;
+    }
+
+    .first-view-text h1 {
+        font-size: 40px;
+        line-height: 52px;
+    }
+
+    .stats {
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .spot-grid {
+        grid-template-columns: 1fr 1fr;
     }
 
     .footer-logo {
@@ -198,24 +502,9 @@ img {
         outline: none;
     }
 }
-.footer {
-    color: #24211b;
-    background-color: #d4fbf8;
-    padding-top: 30px;
-    padding-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.footer-logo {
-    display: block;
-    width: 235px;
-    margin-top: 90px;
-}
-
-.copyright {
-    font-size: 14pt;
-    font-weight: bold;
-    margin-top: 90px;
+@media (max-width: 500px) {
+    .spot-grid {
+        grid-template-columns: 1fr;
+    }
 }
